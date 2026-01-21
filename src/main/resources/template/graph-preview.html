@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: {{ bgColor }};
+            color: {{ textColor }};
+            margin: 0;
+            padding: 20px;
+            font-family: 'JetBrains Mono', sans-serif;
+            overflow: auto;
+        }
+        ::-webkit-scrollbar { display: none; }
+
+        #custom-tooltip {
+            position: absolute;
+            display: none;
+            background: {{ tooltipBg }};
+            color: {{ tooltipColor }};
+            border: 1px solid {{ tooltipBorder }};
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            pointer-events: none;
+            z-index: 9999;
+            max-width: 300px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+        .node, .edgeLabel { cursor: pointer; }
+    </style>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: '{{ mermaidTheme }}',
+            securityLevel: 'loose'
+        });
+
+        window.renderMermaid = async function(base64Code) {
+            const element = document.querySelector('.mermaid');
+            const code = new TextDecoder().decode(Uint8Array.from(atob(base64Code), c => c.charCodeAt(0)));
+
+            try {
+                const { svg } = await mermaid.render('graphDiv', code);
+                element.innerHTML = svg;
+                setupTooltips();
+            } catch (e) {
+                element.innerHTML = '<div style="color:red">Syntax Error: ' + e.message + '</div>';
+            }
+        };
+
+        window.setupTooltips = function() {
+            const tooltipDiv = document.getElementById('custom-tooltip');
+            const nodes = document.querySelectorAll('.mermaid g.node, .mermaid .edgeLabel');
+
+            nodes.forEach(node => {
+                const anchor = node.querySelector('a');
+                let titleText = '';
+
+                if (anchor && anchor.hasAttribute('title')) {
+                    titleText = anchor.getAttribute('title');
+                    anchor.removeAttribute('title');
+                } else if (node.hasAttribute('title')) {
+                    titleText = node.getAttribute('title');
+                    node.removeAttribute('title');
+                }
+
+                if (titleText) {
+                    node.addEventListener('mousemove', (e) => {
+                        tooltipDiv.style.display = 'block';
+                        tooltipDiv.innerHTML = titleText;
+
+                        const x = e.pageX + 15;
+                        const y = e.pageY + 15;
+                        tooltipDiv.style.left = Math.min(x, window.innerWidth - tooltipDiv.offsetWidth - 10) + 'px';
+                        tooltipDiv.style.top = Math.min(y, window.innerHeight - tooltipDiv.offsetHeight - 10) + 'px';
+                    });
+                    node.addEventListener('mouseleave', () => {
+                        tooltipDiv.style.display = 'none';
+                    });
+                }
+            });
+        };
+
+        window.onload = () => {
+            window.renderMermaid('{{ initialBase64 }}');
+        };
+    </script>
+    <title>Graph Preview</title>
+</head>
+<body>
+    <div id="custom-tooltip"></div>
+    <div class="mermaid"></div>
+</body>
+</html>
