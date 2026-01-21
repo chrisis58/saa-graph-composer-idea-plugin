@@ -1,4 +1,4 @@
-package com.github.chrisis58.saagraphcomposerideaplugin
+package cn.teacy.ai.plugin
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

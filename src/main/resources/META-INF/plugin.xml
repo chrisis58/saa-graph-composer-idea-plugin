@@ -9,7 +9,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.chrisis58.saagraphcomposerideaplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.chrisis58.saagraphcomposerideaplugin.startup.MyProjectActivity" />
+        <toolWindow factoryClass="cn.teacy.ai.plugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <postStartupActivity implementation="cn.teacy.ai.plugin.startup.MyProjectActivity" />
     </extensions>
 </idea-plugin>

@@ -1,4 +1,4 @@
-package com.github.chrisis58.saagraphcomposerideaplugin.toolWindow
+package cn.teacy.ai.plugin.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.chrisis58.saagraphcomposerideaplugin.MyBundle
-import com.github.chrisis58.saagraphcomposerideaplugin.services.MyProjectService
+import cn.teacy.ai.plugin.MyBundle
+import cn.teacy.ai.plugin.services.MyProjectService
 import javax.swing.JButton
 
 

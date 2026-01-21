@@ -1,9 +1,9 @@
-package com.github.chrisis58.saagraphcomposerideaplugin.services
+package cn.teacy.ai.plugin.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
-import com.github.chrisis58.saagraphcomposerideaplugin.MyBundle
+import cn.teacy.ai.plugin.MyBundle
 
 @Service(Service.Level.PROJECT)
 class MyProjectService(project: Project) {

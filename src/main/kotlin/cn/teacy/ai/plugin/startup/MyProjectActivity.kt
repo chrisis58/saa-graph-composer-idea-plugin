@@ -1,4 +1,4 @@
-package com.github.chrisis58.saagraphcomposerideaplugin.startup
+package cn.teacy.ai.plugin.startup
 
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
