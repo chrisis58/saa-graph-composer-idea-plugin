@@ -10,5 +10,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <implicitUsageProvider implementation="cn.teacy.ai.plugin.provider.GraphImplicitUsageProvider"/>
 
+        <toolWindow id="Saa Graph Preview" anchor="right" factoryClass="cn.teacy.ai.plugin.ui.GraphToolWindowFactory"/>
+
+        <codeInsight.lineMarkerProvider language="JAVA" implementationClass="cn.teacy.ai.plugin.provider.GraphLineMarkerProvider"/>
     </extensions>
 </idea-plugin>
