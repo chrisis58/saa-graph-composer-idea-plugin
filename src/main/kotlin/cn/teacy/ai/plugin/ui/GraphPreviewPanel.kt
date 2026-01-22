@@ -9,7 +9,6 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.psi.PsiClass
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.jcef.JBCefBrowser
-import com.intellij.util.ui.UIUtil
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.nio.charset.StandardCharsets
@@ -74,7 +73,8 @@ class GraphPreviewPanel() : SimpleToolWindowPanel(true, true) {
     }
 
     private fun updateHtml(mermaidCode: String) {
-        val currentIsDark = UIUtil.isUnderDarcula()
+        val scheme = EditorColorsManager.getInstance().globalScheme
+        val currentIsDark = ColorUtil.isDark(scheme.defaultBackground)
         lastMermaidCode = mermaidCode
 
         if (isPageLoaded && lastIsDark == currentIsDark) {
@@ -98,9 +98,8 @@ class GraphPreviewPanel() : SimpleToolWindowPanel(true, true) {
     }
 
     private fun getHtmlContent(mermaidCode: String): String {
-        val isDark = UIUtil.isUnderDarcula()
-        val mermaidTheme = if (isDark) "dark" else "default"
         val scheme = EditorColorsManager.getInstance().globalScheme
+        val isDark = ColorUtil.isDark(scheme.defaultBackground)
         val bgColor = ColorUtil.toHex(scheme.defaultBackground)
         val textColor = if (isDark) "#bbbbbb" else "#333333"
 
@@ -108,6 +107,7 @@ class GraphPreviewPanel() : SimpleToolWindowPanel(true, true) {
         val tooltipBorder = if (isDark) "#616161" else "#bbb"
         val tooltipColor = if (isDark) "#f1f1f1" else "#333"
 
+        val mermaidTheme = if (isDark) "dark" else "default"
         val initialBase64 = encodeToBase64(mermaidCode)
 
         return GraphPreviewTemplate.render(
