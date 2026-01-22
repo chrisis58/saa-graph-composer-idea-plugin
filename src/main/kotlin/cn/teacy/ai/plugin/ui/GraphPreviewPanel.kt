@@ -32,36 +32,38 @@ class GraphPreviewPanel() : SimpleToolWindowPanel(true, true) {
     }
 
     private fun createToolBar(): ActionToolbar {
-        val actionGroup = DefaultActionGroup()
-        actionGroup.add(object : AnAction("Refresh Graph", "Refresh current Graph", AllIcons.Actions.Refresh) {
-            override fun actionPerformed(e: AnActionEvent) {
-                if (lastPicClass != null) {
-                    renderGraph(lastPicClass!!)
+        val actionGroup = DefaultActionGroup().apply {
+            add(object : AnAction("Refresh Graph", "Refresh current Graph", AllIcons.Actions.Refresh) {
+                override fun actionPerformed(e: AnActionEvent) {
+                    if (lastPicClass != null) {
+                        renderGraph(lastPicClass!!)
+                    }
                 }
-            }
-        })
+            })
 
-        actionGroup.add(object : AnAction("Copy Source Code", "Copy current Mermaid source code to clipboard", AllIcons.Actions.Copy) {
-            override fun actionPerformed(e: AnActionEvent) {
-                if (lastPicClass != null) {
-                    val clipboard = Toolkit.getDefaultToolkit().systemClipboard
-                    val selection = StringSelection(lastMermaidCode!!)
-                    clipboard.setContents(selection, selection)
+            add(object : AnAction("Copy Source Code", "Copy current Mermaid source code to clipboard", AllIcons.Actions.Copy) {
+                override fun actionPerformed(e: AnActionEvent) {
+                    if (lastPicClass != null) {
+                        val clipboard = Toolkit.getDefaultToolkit().systemClipboard
+                        val selection = StringSelection(lastMermaidCode!!)
+                        clipboard.setContents(selection, selection)
+                    }
                 }
-            }
 
-            override fun update(e: AnActionEvent) {
-                val hasContent = lastPicClass != null && !lastMermaidCode.isNullOrEmpty()
-                e.presentation.isEnabled = hasContent
-            }
+                override fun update(e: AnActionEvent) {
+                    val hasContent = lastPicClass != null && !lastMermaidCode.isNullOrEmpty()
+                    e.presentation.isEnabled = hasContent
+                }
 
-            override fun getActionUpdateThread(): ActionUpdateThread {
-                return ActionUpdateThread.BGT
-            }
-        })
+                override fun getActionUpdateThread(): ActionUpdateThread {
+                    return ActionUpdateThread.BGT
+                }
+            })
+        }
 
-        val toolbar = ActionManager.getInstance().createActionToolbar("SaaGraphToolbar", actionGroup, true)
-        toolbar.targetComponent = browser.component
+        val toolbar = ActionManager.getInstance().createActionToolbar("SaaGraphToolbar", actionGroup, true).apply {
+            targetComponent = browser.component
+        }
         return toolbar
     }
 
