@@ -143,6 +143,6 @@ If you prefer to test with an existing project, you can clone the official frame
 
 2. **Open in IntelliJ IDEA** and wait for Maven indexing to complete. 
 
-3. **Navigate to test cases:**  Open `saa-graph-composer/src/test/java/cn/teacy/ai/tests` (or the specific path to your test files). 
+3. **Navigate to test cases:**  Open `saa-graph-composer/src/test/java/cn/teacy/ai/tests`. 
 
 4. **Preview:**  You will see the **Preview icon** in the gutter for any class annotated with `@GraphComposer`. Click it to visualize the test graph.
