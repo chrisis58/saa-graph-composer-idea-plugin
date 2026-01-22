@@ -3,23 +3,6 @@
     <id>cn.teacy.ai.saa.graph.composer</id>
     <name>SAA Graph Composer</name>
     <vendor email="chrisis58@outlook.com" url="https://github.com/chrisis58">chrisis58</vendor>
-    <description><![CDATA[
-          <p><b>The official IntelliJ IDEA plugin for the <a href="https://github.com/chrisis58/saa-graph-composer">SAA Graph Composer</a> framework.</b></p>
-
-          <p>This plugin is designed to supercharge your development with <b>Spring AI Alibaba Graph</b>. It provides seamless visualization and code insight support for your graph definitions.</p>
-
-          <br/>
-          <h3>Key Features</h3>
-          <ul>
-            <li><b>Live Mermaid Preview:</b> Instantly visualize your <code>@GraphComposer</code> classes as interactive Mermaid flowcharts directly in the IDE side panel.</li>
-            <li><b>Smart Code Insight:</b> Implements <code>ImplicitUsageProvider</code> to recognize graph components, preventing false "Unused declaration" warnings for your composer classes.</li>
-            <li><b>Theme Synchronization:</b> The preview automatically adapts to your IDE's theme (Light/Dark/Darcula) for a native look and feel.</li>
-            <li><b>One-Click Export:</b> Easily copy the generated Mermaid source code for documentation or sharing.</li>
-          </ul>
-
-          <br/>
-          <p><i>Note: This plugin requires the saa-graph-composer library to function.</i></p>
-    ]]></description>
 
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.platform</depends>
